@@ -23,6 +23,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let currentPlayer = 'X';
     let gameActive = true;
+    let playerXScore = 0;
+    let playerOScore = 0;
+    let tieScore = 0;
 
     function handleCellClick(cell) {
 
@@ -35,9 +38,11 @@ document.addEventListener("DOMContentLoaded", function () {
             if (checkWinner(currentPlayer)) {
                 showModal(`Player ${currentPlayer} wins!`);
                 gameActive = false;
+                handleEndOfGame(currentPlayer);
             } else if (checkDraw()) {
                 showModal("It's a draw!");
-                gameActive = false; e
+                gameActive = false;
+                handleEndOfGame('tie');
             } else {
                 currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
                 updateTurnIndicator();
@@ -84,6 +89,31 @@ document.addEventListener("DOMContentLoaded", function () {
         modal.style.display = "block";
         modalMessage.textContent = message;
     }
+    // Function to handle end of game and update scores
+    function handleEndOfGame(outcome) {
+        switch (outcome) {
+            case 'X': // Player X wins
+                playerXScore++;
+                break;
+            case 'O': // Player O wins
+                playerOScore++;
+                break;
+            case 'tie': // Tie
+                tieScore++;
+                break;
+            default:
+                break;
+        }
+        updateScores(); // Update score display
+    }
+
+    // Function to update score display
+    function updateScores() {
+        document.querySelector('.player-x-score').textContent = `Player X: ${playerXScore}`;
+        document.querySelector('.player-o-score').textContent = `Player O: ${playerOScore}`;
+        document.querySelector('.tie-score').textContent = `Ties: ${tieScore}`;
+    }
+
 
     closeButton.addEventListener('click', () => {
         modal.style.display = "none";
