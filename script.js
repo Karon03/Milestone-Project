@@ -30,6 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function handleCellClick(cell) {
 
         if (gameActive && cell.textContent === '') {
+            document.querySelector('.click-sound').play();
             cell.textContent = currentPlayer;
             cell.dataset.player = currentPlayer;
             cell.classList.add(currentPlayer);
@@ -89,25 +90,27 @@ document.addEventListener("DOMContentLoaded", function () {
         modal.style.display = "block";
         modalMessage.textContent = message;
     }
-    // Function to handle end of game and update scores
+    
     function handleEndOfGame(outcome) {
         switch (outcome) {
-            case 'X': // Player X wins
+            case 'X': 
                 playerXScore++;
+                document.querySelector('.win-sound').play();
                 break;
-            case 'O': // Player O wins
+            case 'O': 
                 playerOScore++;
+                document.querySelector('win-sound').play();
                 break;
-            case 'tie': // Tie
+            case 'tie': 
                 tieScore++;
                 break;
             default:
                 break;
         }
-        updateScores(); // Update score display
+        updateScores(); 
     }
 
-    // Function to update score display
+    
     function updateScores() {
         document.querySelector('.player-x-score').textContent = `Player X: ${playerXScore}`;
         document.querySelector('.player-o-score').textContent = `Player O: ${playerOScore}`;
