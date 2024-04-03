@@ -90,27 +90,27 @@ document.addEventListener("DOMContentLoaded", function () {
         modal.style.display = "block";
         modalMessage.textContent = message;
     }
-    
+
     function handleEndOfGame(outcome) {
         switch (outcome) {
-            case 'X': 
+            case 'X':
                 playerXScore++;
                 document.querySelector('.win-sound').play();
                 break;
-            case 'O': 
+            case 'O':
                 playerOScore++;
-                document.querySelector('win-sound').play();
+                document.querySelector('.win-sound').play();
                 break;
-            case 'tie': 
+            case 'tie':
                 tieScore++;
                 break;
             default:
                 break;
         }
-        updateScores(); 
+        updateScores();
     }
 
-    
+
     function updateScores() {
         document.querySelector('.player-x-score').textContent = `Player X: ${playerXScore}`;
         document.querySelector('.player-o-score').textContent = `Player O: ${playerOScore}`;
